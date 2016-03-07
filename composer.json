@@ -1,0 +1,11 @@
+{
+  "name": "anattadesign/awesome_checkout",
+  "type": "magento-module",
+  "description": "",
+  "homepage": "https://github.com/anattadesign/AwesomeCheckout",
+  "authors": [
+    {
+      "name": "Anatta Design"
+    }
+  ]
+}
