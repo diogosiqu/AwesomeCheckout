@@ -309,7 +309,7 @@ class AnattaDesign_AwesomeCheckout_Helper_Data extends Mage_Core_Helper_Abstract
 		if( $minimumShippingCost === false ) {
 			$carriers = Mage::getStoreConfig( 'carriers', Mage::app()->getStore()->getId() );
 			foreach( $carriers as $carrierCode => $carrierConfig ) {
-				if( $carrierConfig['active'] ) {
+				if( isset($carrierConfig['active']) && $carrierConfig['active'] ) {
 					if( isset( $carrierConfig['price'] ) && ( $minimumShippingCost === false || $carrierConfig['price'] < $minimumShippingCost ) ) {
 						$minimumShippingCost = $carrierConfig['price'];
 						//$quote->getShippingAddress()->setShippingMethod( $this->getShippingCodeByName( $carrierConfig[ 'name' ] ) ); // setting a shipping method way doesn't work until shipping rates are actually collected for quote
