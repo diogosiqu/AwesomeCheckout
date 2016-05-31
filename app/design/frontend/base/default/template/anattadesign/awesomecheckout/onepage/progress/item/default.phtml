@@ -1,0 +1,53 @@
+<?php
+/**
+ * @var $this Mage_Checkout_Block_Cart_Item_Renderer
+ */
+
+$_cartItem = $this->getItem();
+$_options = $this->getOptionList();
+?>
+<tr>
+    <td class="p-image">
+        <span class="product-image">
+            <img src="<?php echo $this->getProductThumbnail()->resize(150); ?>" width="75" height="75"
+                 alt="<?php echo $this->escapeHtml($this->getProductName()) ?>"/>
+        </span>
+    </td>
+    <td valing="top" class="p-name">
+        <strong><?= $this->escapeHtml($this->getProductName()); ?></strong>
+        <?php if ($_options): ?>
+            <dl class="item-options">
+                <?php foreach ($_options as $_option): ?>
+                    <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option); ?>
+                    <?php $isTruncated = isset($_formatedOptionValue['full_view']); ?>
+                    <dt><?= $this->escapeHtml($_option['label']) ?></dt>
+                    <dd<?= $isTruncated? ' class="truncated"': '' ?>><?= $_formatedOptionValue['value']; ?>
+                        <?php if ($isTruncated): ?>
+                            <div class="truncated_full_value">
+                                <dl class="item-options">
+                                    <dt><?= $this->escapeHtml($_option['label']); ?></dt>
+                                    <dd><?= $_formatedOptionValue['full_view']; ?></dd>
+                                </dl>
+                            </div>
+                        <?php endif ?>
+                    </dd>
+                <?php endforeach ?>
+            </dl>
+        <?php endif ?>
+    </td>
+    <td valing="top" class="p-p">
+        <strong><span class="price"><?php
+                $_incl = $_cartItem->getRowTotalInclTax();
+                $_excl = $_cartItem->getRowTotal();
+                if ($this->helper('tax')->displayCartPriceInclTax()) {
+                    echo Mage::helper('core')->currency($_incl, true, false);
+                } else {
+                    echo Mage::helper('core')->currency($_excl, true, false);
+                }
+                if ($this->helper('tax')->displayCartBothPrices() && $_incl != $_excl) {
+                    echo '(' . $this->__('Incl. Tax ');
+                    echo Mage::helper('core')->currency($_incl, true, false) . ')';
+                }
+                ?></span></strong>
+    </td>
+</tr>
