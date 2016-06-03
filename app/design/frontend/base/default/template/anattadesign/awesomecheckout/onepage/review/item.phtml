@@ -21,7 +21,7 @@
 <td>
 	<?php $_product = Mage::getModel('catalog/product')->load($_item->getProduct()->getID()); ?>
 	<span class="product-image">
-		<img src="<?php echo (string) $this->helper('catalog/image')->init($_product, 'image')->resize(50)->setWatermarkSize(0)->setWatermarkImageOpacity(0); ?>" alt="<?php echo $this->__( 'Product Image' ); ?>" />
+		<img width="50" height="50" src="<?php echo $this->getProductThumbnail()->resize(100); ?>" alt="<?php echo $this->__( 'Product Image' ); ?>" />
 	</span>
 	<h3 class="product-name">
 		<?php echo $this->htmlEscape($this->getProductName()) ?>
