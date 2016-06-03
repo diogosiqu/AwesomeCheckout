@@ -176,55 +176,7 @@
 			<?php if ( $this->getCheckout()->getStepData( 'payment', 'complete' ) ) : ?>
 				<p><?php echo $this->__('Double-Check your ordered items & click on "Place Order" to complete your purchase.'); ?></p>
 			<?php else : ?>
-				<?php $cartItems = Mage::getSingleton( 'checkout/session' )->getQuote()->getAllVisibleItems(); ?>
-				<table class="p-list">
-					<?php foreach ( $cartItems as $cartItem ) { ?>
-						<tr>
-							<td class="p-image">
-								<?php $_product = Mage::getModel( 'catalog/product' )->load( $cartItem->getProduct()->getID() ); ?>
-								<span class="product-image">
-									<img src="<?php echo (string) $this->helper( 'catalog/image' )->init( $_product, 'image' )->resize( 50 )->setWatermarkSize(0)->setWatermarkImageOpacity(0); ?>" alt="<?php echo $this->__( 'Product Image' ); ?>" />
-								</span>
-							</td>
-							<td valing="top" class="p-name">
-								<strong><?php echo $this->htmlEscape( $_product->getName() ); ?></strong>
-								<?php if ( $_options = $this->getOptionList() ) { ?>
-									<dl class="item-options">
-										<?php foreach ( $_options as $_option ) { ?>
-											<?php $_formatedOptionValue = $this->getFormatedOptionValue( $_option ); ?>
-											<dt><?php echo $this->htmlEscape( $_option['label'] ) ?></dt>
-											<dd<?php if ( isset( $_formatedOptionValue['full_view'] ) ) { ?> class="truncated"<?php } ?>><?php echo $_formatedOptionValue['value']; ?>
-												<?php if ( isset( $_formatedOptionValue['full_view'] ) ) { ?>
-													<div class="truncated_full_value">
-														<dl class="item-options">
-															<dt><?php echo $this->htmlEscape( $_option['label'] ); ?></dt>
-															<dd><?php echo $_formatedOptionValue['full_view']; ?></dd>
-														</dl>
-													</div>
-												<?php } ?>
-											</dd>
-										<?php } ?>
-									</dl>
-								<?php } ?>
-							</td>
-							<td valing="top" class="p-p">
-								<strong><span class="price"><?php
-								$_incl = $cartItem->getRowTotalInclTax();
-								$_excl = $cartItem->getRowTotal();
-								if ($this->helper('tax')->displayCartPriceInclTax()) {
-									echo Mage::helper('core')->currency($_incl, true, false);
-								} else {
-									echo Mage::helper('core')->currency($_excl, true, false);
-								}
-								if ($this->helper('tax')->displayCartBothPrices() && $_incl != $_excl) {
-									echo '(' . $this->__('Incl. Tax ');
-									echo Mage::helper('core')->currency($_incl, true, false) . ')';
-								}
-								?></span></strong>
-							</td>
-						</tr>
-					<?php } ?>
-				</table>
+				<?php echo $this->getChildHtml('progressItems') ?>
 				<table class="p-final">
 					<tr>
 						<td align="right" class="p-sbt-t"><?php echo $this->__( 'Subtotal' ) ?></td>

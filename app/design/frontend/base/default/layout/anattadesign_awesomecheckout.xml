@@ -85,7 +85,30 @@ along with AwesomeCheckout.  If not, see <http://www.gnu.org/licenses/>.
 				<action method="setElementId">
 					<value>checkout-progress-wrapper</value>
 				</action>
-				<block type="checkout/onepage_progress" name="checkout.progress" before="-" template="anattadesign/awesomecheckout/onepage/progress.phtml"/>
+				<block type="checkout/onepage_progress" name="checkout.progress" before="-" template="anattadesign/awesomecheckout/onepage/progress.phtml">
+					<block type="checkout/cart_sidebar" name="checkout.progress.items" as="progressItems"
+						   template="anattadesign/awesomecheckout/onepage/progress/items.phtml">
+						<action method="addItemRender">
+							<type>simple</type>
+							<block>checkout/cart_item_renderer</block>
+							<template>anattadesign/awesomecheckout/onepage/progress/item/default.phtml</template>
+						</action>
+						<action method="addItemRender">
+							<type>grouped</type>
+							<block>checkout/cart_item_renderer_grouped</block>
+							<template>anattadesign/awesomecheckout/onepage/progress/item/default.phtml</template>
+						</action>
+						<action method="addItemRender">
+							<type>configurable</type>
+							<block>checkout/cart_item_renderer_configurable</block>
+							<template>anattadesign/awesomecheckout/onepage/progress/item/default.phtml</template>
+						</action>
+						<block type="core/text_list" name="topCart.extra_actions" as="extra_actions" translate="label"
+							   module="checkout">
+							<label>My Cart Extra Actions</label>
+						</block>
+					</block>
+				</block>
 			</block>
 
 			<block type="checkout/onepage" name="checkout.onepage" template="anattadesign/awesomecheckout/onepage.phtml">
@@ -140,6 +163,29 @@ along with AwesomeCheckout.  If not, see <http://www.gnu.org/licenses/>.
 		<remove name="left"/>
 
 		<block type="checkout/onepage_progress" name="root" output="toHtml" template="anattadesign/awesomecheckout/onepage/progress.phtml">
+			<block type="checkout/cart_sidebar" name="checkout.progress.items" as="progressItems"
+				   template="anattadesign/awesomecheckout/onepage/progress/items.phtml">
+				<action method="addItemRender">
+					<type>simple</type>
+					<block>checkout/cart_item_renderer</block>
+					<template>anattadesign/awesomecheckout/onepage/progress/item/default.phtml</template>
+				</action>
+				<action method="addItemRender">
+					<type>grouped</type>
+					<block>checkout/cart_item_renderer_grouped</block>
+					<template>anattadesign/awesomecheckout/onepage/progress/item/default.phtml</template>
+				</action>
+				<action method="addItemRender">
+					<type>configurable</type>
+					<block>checkout/cart_item_renderer_configurable</block>
+					<template>anattadesign/awesomecheckout/onepage/progress/item/default.phtml</template>
+				</action>
+				<block type="core/text_list" name="topCart.extra_actions" as="extra_actions" translate="label"
+					   module="checkout">
+					<label>My Cart Extra Actions</label>
+				</block>
+			</block>
+
 			<block type="checkout/onepage_payment_info" name="payment_info">
 				<action method="setInfoTemplate">
 					<method></method>
