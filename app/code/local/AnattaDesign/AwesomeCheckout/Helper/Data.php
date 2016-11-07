@@ -21,6 +21,17 @@ class AnattaDesign_AwesomeCheckout_Helper_Data extends Mage_Core_Helper_Abstract
 	protected $_geoip_record;
 	protected $_config_cache = array( );
 
+	public function filterWhitelistHandles($handles)
+	{
+		if (!is_array($handles)) {
+			return $this->filterWhitelistHandles([$handles]);
+		}
+		$allowedHandles = array_filter(
+			array_map('trim',
+				explode(PHP_EOL, $this->getConfigData('advanced/whitelisted_handles'))));
+		return array_intersect($allowedHandles, $handles);
+	}
+
 	/**
 	 * Get config data
 	 *

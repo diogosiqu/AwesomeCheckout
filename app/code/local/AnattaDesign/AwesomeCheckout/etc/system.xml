@@ -486,6 +486,16 @@ along with AwesomeCheckout.  If not, see <http://www.gnu.org/licenses/>.
 							#row_awesomecheckout_advanced_whitelist_css_js .textarea, #row_awesomecheckout_advanced_whitelist_css_js .note{width:100%!important;}
 							</style>]]></comment>
 						</whitelisted_css_js>
+						<whitelisted_handles translate="label comment">
+							<label>Whitelist Layout Handles</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment><![CDATA[
+							Enter layout handles allowed during method refresh, one per line.]]></comment>
+						</whitelisted_handles>
 					</fields>
 				</advanced>
 			</groups>
