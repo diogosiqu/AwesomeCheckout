@@ -946,7 +946,7 @@ class AnattaDesign_AwesomeCheckout_OnepageController extends Mage_Checkout_Contr
 				);
 
 				if ($this->getRequest()->getParam('reload_step_block')) {
-					$this->loadLayout(Mage::helper('anattadesign_awesomecheckout')->filterWhitelistHandles($this->getRequest()->getParam('reload_step_block'));
+					$this->loadLayout(Mage::helper('anattadesign_awesomecheckout')->filterWhitelistHandles($this->getRequest()->getParam('reload_step_block')));
 					$result['update_section']['html'] = $this->_getReviewHtml();
 				}
 			}
