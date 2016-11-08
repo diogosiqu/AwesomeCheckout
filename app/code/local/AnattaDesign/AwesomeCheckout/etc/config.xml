@@ -252,6 +252,12 @@ along with AwesomeCheckout.  If not, see <http://www.gnu.org/licenses/>.
 				<enable>0</enable>
 				<ask_the_user>1</ask_the_user>
 			</newsletter>
+			<advanced>
+				<whitelisted_handles><![CDATA[
+anattadesign_awesomecheckout_onepage_paymentmethod
+checkout_onepage_payment
+				]]></whitelisted_handles>
+			</advanced>
 		</awesomecheckout>
 	</default>
 </config>
