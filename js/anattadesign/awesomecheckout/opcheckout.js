@@ -23,7 +23,7 @@ function ccType(num) {
 	num = num.replace(/[^\d]/g, '');
 	// only consider the first 6 digits to match
 	num = num.slice(0,6);
-	if (num.match(/^5[1-5][0-9]{4}$/)) {
+	if (num.match(/^(5[1-5][0-9]{4}|2(22[1-9][0-9]{2}|2[3-9][0-9]{3}|[3-6][0-9]{4}|7[0-1][0-9]{3}|720[0-9]{2}))$/)) {
 		return 'MasterCard';
 	} else if (num.match(/^4[0-9]{5}(?:[0-9]{3})?$/)) {
 		return 'Visa';
@@ -1763,3 +1763,21 @@ jQuery.validator.addClassRules({
 		creditcard2: ''
 	}
 });
+
+// Additions to support MasterCard series 2
+var cc2 = jQuery.validator.methods['creditcard2'];
+jQuery.validator.addMethod('creditcard2', function (value, element, param) {
+
+    var cardName = param;
+
+    if (typeof(cardName) !== 'string' || typeof(cardName) == 'string' && cardName == '') {
+        cardName = ccType(value);
+    }
+
+    if (cardName === 'MasterCard') {
+        return /^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(value);
+    }
+
+    return cc2(value, element, param);
+
+}, jQuery.validator.messages.creditcard);
